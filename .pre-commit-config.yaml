@@ -1,0 +1,144 @@
+---
+minimum_pre_commit_version: 3.0.0
+default_language_version:
+  python: python3.10
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-ast
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+      - id: name-tests-test
+        # The default pattern is: (^|/)tests/.+\.py$
+        files: ^.*test.*\.py$
+  # Remote
+  # - repo: https://github.com/psf/black
+  #   rev: 23.1.0
+  #   hooks:
+  #     - id: black
+  #       args:
+  #         - --check
+  # Local
+  - repo: local
+    hooks:
+      - id: black
+        name: black
+        entry: black
+        language: system
+        types: [python]
+        args:
+          - --check
+  # Remote
+  # - repo: https://github.com/pycqa/isort
+  #   rev: 5.12.0
+  #   hooks:
+  #     - id: isort
+  #       name: isort
+  #       args:
+  #         - --check
+  # Local
+  - repo: local
+    hooks:
+      - id: isort
+        name: isort
+        entry: isort
+        language: system
+        types: [python]
+        args:
+          - --check
+  # Remote
+  # - repo: https://github.com/pycqa/flake8
+  #   rev: 6.0.0
+  #   hooks:
+  #     - id: flake8
+  #       additional_dependencies:
+  #         - flake8-bugbear
+  # Local
+  - repo: local
+    hooks:
+      - id: flake8
+        name: flake8
+        entry: flake8
+        language: system
+        types: [python]
+  # Remote
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.0.1
+  #   hooks:
+  #     - id: mypy
+  # Local
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types: [python]
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args:
+          # Don't display the full report
+          - -rn
+          # Don't display the score
+          - -sn
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-no-eval
+      - id: python-check-blanket-noqa
+      - id: python-check-blanket-type-ignore
+      - id: python-use-type-annotations
+      - id: python-check-mock-methods
+  # Remote
+  # I could not force Gitlint to use the configuration file
+  # from this project when it was installed from a remote source, hence
+  # the options passed in args :(
+  # - repo: https://github.com/jorisroovers/gitlint
+  #   rev: v0.18.0
+  #   hooks:
+  #     - id: gitlint
+  #       args:
+  #         - -ctitle-max-length.line-length=50
+  #         - -cbody-max-line-length.line-length=72
+  #         - -cbody-min-length.min-length=5
+  #         - -cbody-match-regex.regex=PROJECT-\d+$
+  #         - --ignore
+  #         - body-is-missing
+  #         - --msg-filename
+  # Local
+  - repo: local
+    hooks:
+      - id: gitlint
+        name: gitlint
+        entry: gitlint
+        language: system
+        args:
+          - --staged
+          - --msg-filename
+        stages:
+          - commit-msg
+  # Local
+  - repo: local
+    hooks:
+      - id: gitlint-ci
+        name: gitlint
+        language: system
+        entry: gitlint
+        always_run: true
+        pass_filenames: false
+        stages:
+          - manual
