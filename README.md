@@ -1,6 +1,21 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-# pre_commit_fundamentals
+# Table of Contents
+
+<!--toc:start-->
+
+- [Introduction](#introduction)
+  - [Using pre-commit](#using-pre-commit)
+    - [Initial configuration](#initial-configuration)
+      - [Gitlint](#gitlint)
+        - [Gitlint in a CI environment](#gitlint-in-a-ci-environment)
+    - [Skipping running Git pre-commit hooks](#skipping-running-git-pre-commit-hooks)
+    - [Running pre-commit in a CI environment](#running-pre-commit-in-a-ci-environment)
+  - [How to play with this repository](#how-to-play-with-this-repository)
+  - [Dependencies](#dependencies)
+  <!--toc:end-->
+
+# Introduction
 
 This repository contains a set of badly written files with Python code to show
 what [pre-commit](https://pre-commit.com/) can do to easily enforce code style
