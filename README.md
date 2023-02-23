@@ -67,6 +67,12 @@ to check only particular files. For other options, see the output of
 `pre-commit --help` command. If you want to run only a particular hook, pass the
 hook's ID to the call to `pre-commit run`.
 
+## How to play with this repository
+
+If you want to see for yourself how awesome `pre-commit` is, simply make a
+change in one of the files or create a brand new one, add the changes to Git's
+staging area and try to commit them.
+
 ## Dependencies
 
 The code was written using Python 3.10.9. All the needed dependencies are in the
