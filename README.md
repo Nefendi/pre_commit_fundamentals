@@ -95,7 +95,9 @@ It is also possible to run `pre-commit` without making a commit. It is as easy
 as running `pre-commit run --all-files` or `pre-commit run --files` if you want
 to check only particular files. For other options, see the output of
 `pre-commit --help` command. If you want to run only a particular hook, pass the
-hook's ID to the call to `pre-commit run`.
+hook's ID to the call to `pre-commit run`. In situations when speed matters, you
+can run `pre-commit` only on the latest revision with
+`pre-commit run --from-ref HEAD~1 --to-ref HEAD` or something similar.
 
 ## How to play with this repository
 
