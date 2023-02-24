@@ -11,7 +11,7 @@
       - [Gitlint](#gitlint)
         - [Gitlint in a CI environment](#gitlint-in-a-ci-environment)
       - [Commit messages get dropped upon rejection by gitlint](#commit-messages-get-dropped-upon-rejection-by-gitlint)
-    - [Skipping running Git pre-commit hooks](#skipping-running-git-pre-commit-hooks)
+    - [Skipping running Git hooks](#skipping-running-git-hooks)
     - [Running pre-commit in a CI environment](#running-pre-commit-in-a-ci-environment)
   - [How to play with this repository](#how-to-play-with-this-repository)
   - [Dependencies](#dependencies)
@@ -26,15 +26,15 @@ CI environment.
 
 ## Using pre-commit
 
-**Pre-commit** is a tool for 'managing and maintaining multi-language pre-commit
-hooks' (a direct quote from the website linked above). The heart of
-**pre-commit** is its configuration file, namely `.pre-commit-config.yaml`. In
-this file, it is possible to specify various tools that should be run and check
-source code before a Git commit can be made (hence the name `pre-commit`). The
-tools mentioned in the configuration files can be local ones or links to
-external repositories configured as 'pre-commit hooks providers' (these are my
-words). Local tools will be searched for in our local machines, but remote
-sources will be downloaded and set up by `pre-commit` automatically.
+`Pre-commit` is a tool for 'managing and maintaining multi-language pre-commit
+hooks' (a direct quote from the website linked above). The heart of `pre-commit`
+is its configuration file, namely `.pre-commit-config.yaml`. In this file, it is
+possible to specify various tools that should be run and check source code
+before a Git commit can be made (hence the name `pre-commit`). The tools
+mentioned in the configuration files can be local ones or links to external
+repositories configured as 'pre-commit hooks providers' (these are my words).
+Local tools will be searched for in our local machines, but remote sources will
+be downloaded and set up by `pre-commit` automatically.
 
 ### Initial configuration
 
@@ -82,12 +82,13 @@ not something that you cannot fix easily by yourself. After your commit has been
 rejected, you can edit the previous commit message with this command:
 `git commit --edit --file $(git rev-parse --git-path COMMIT_EDITMSG)`.
 
-### Skipping running Git pre-commit hooks
+### Skipping running Git hooks
 
 Sometimes when working fast on a feature, you may want to ignore the established
 checks, because you are going to correct your mistakes in the future (after a
-lot of rebases and clean-ups, for example). Skipping running Git pre-commit
-hooks is as easy as passing the `--no-verify` flag to the `git commit` command.
+lot of rebases and clean-ups, for example). Skipping running Git hooks (all
+hooks, not only those installed by `pre-commit`) is as easy as passing the
+`--no-verify` flag to the `git commit` command.
 
 ### Running pre-commit in a CI environment
 
