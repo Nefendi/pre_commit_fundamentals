@@ -4,11 +4,13 @@
 
 <!--toc:start-->
 
+- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Using pre-commit](#using-pre-commit)
     - [Initial configuration](#initial-configuration)
       - [Gitlint](#gitlint)
         - [Gitlint in a CI environment](#gitlint-in-a-ci-environment)
+      - [Commit messages get dropped upon rejection by gitlint](#commit-messages-get-dropped-upon-rejection-by-gitlint)
     - [Skipping running Git pre-commit hooks](#skipping-running-git-pre-commit-hooks)
     - [Running pre-commit in a CI environment](#running-pre-commit-in-a-ci-environment)
   - [How to play with this repository](#how-to-play-with-this-repository)
@@ -66,6 +68,19 @@ parameters, which causes the linting to be applied to the latest commit. The
 hook has a `manual` stage hard-coded, which signifies that it needs to be
 invoked manually by running `pre-commit run --hook-stage manual gitlint-ci`. You
 can read more in the documentation linked above.
+
+#### Commit messages get dropped upon rejection by gitlint
+
+Unfortunately, if your commit gets rejected by `gitlint` and you try to make a
+commit once again to correct your mistakes, you will not see the previous commit
+message. This is a known limitation of `pre-commit` arising from the fact how
+the `commit-msg` hook works in Git. Perhaps there exists a tool for fixing this,
+but I have not found it. Nor have I searched for it very vigorously. You can
+read more about the issue
+[here](https://github.com/pre-commit/pre-commit/issues/833). Luckily, this is
+not something that you cannot fix easily by yourself. After your commit has been
+rejected, you can edit the previous commit message with this command:
+`git commit --edit --file $(git rev-parse --git-path COMMIT_EDITMSG)`.
 
 ### Skipping running Git pre-commit hooks
 
