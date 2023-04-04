@@ -13,6 +13,8 @@ repos:
       - id: check-json
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        args:
+          - --markdown-linebreak-ext=md
       - id: check-ast
       - id: check-added-large-files
       - id: check-merge-conflict
@@ -20,6 +22,8 @@ repos:
       - id: name-tests-test
         # The default pattern is: (^|/)tests/.+\.py$
         files: ^.*test.*\.py$
+        args:
+          - --pytest-test-first
   # Remote
   # - repo: https://github.com/psf/black
   #   rev: 23.1.0
